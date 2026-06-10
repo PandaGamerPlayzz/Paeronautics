@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "paeronautics:bore_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "dndesires:bore_block"
+  }
+}

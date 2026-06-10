@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "priority": 1500,
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "paeronautics.refmap.json",
+  "mixins": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": []
+}

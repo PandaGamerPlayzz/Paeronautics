@@ -1,7 +1,0 @@
-{
-	"parent": "create:block/gearshift/block",
-    "textures": {
-        "0": "dndesires:block/inverse_box",
-		"particle": "dndesires:block/inverse_box"
-    }
-}

@@ -17,10 +17,15 @@ repositories {
 }
 
 base {
-    archivesName = "DnDesires-$minecraft_version"
+    archivesName = "Paeronautics-$minecraft_version"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+var copyDndesiresToRunMods = tasks.register("copyDndesiresToRunMods", Copy) {
+    from layout.projectDirectory.file("libs/${dndesires_file}")
+    into layout.projectDirectory.dir("run/mods")
+}
 
 neoForge {
     version = project.neo_version
@@ -53,6 +58,7 @@ neoForge {
             systemProperty "neoforge.disableModLoading", "true"
         }
         configureEach {
+            taskBefore copyDndesiresToRunMods
             systemProperty 'forge.logging.markers', 'REGISTRIES'
             logLevel = org.slf4j.event.Level.DEBUG
         }
@@ -67,10 +73,6 @@ neoForge {
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
     exclude '.cache/'
-}
-
-configurations {
-    runtimeClasspath.extendsFrom localRuntime
 }
 
 repositories {
@@ -105,6 +107,7 @@ dependencies {
     implementation("dev.ryanhcode.offroad:offroad-neoforge-${minecraft_version}:${bundled_version}")
     implementation("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${bundled_version}")
     implementation("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${bundled_version}")
+    compileOnly(files("libs/${dndesires_file}"))
 
     compileOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}:api")
     runtimeOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}")
@@ -156,6 +159,22 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+tasks.named('prepareClientRun') {
+    dependsOn copyDndesiresToRunMods
+}
+
+tasks.named('prepareServerRun') {
+    dependsOn copyDndesiresToRunMods
+}
+
+tasks.named('prepareGameTestServerRun') {
+    dependsOn copyDndesiresToRunMods
+}
+
+tasks.named('build') {
+    dependsOn tasks.named('prepareClientRun')
 }
 
 idea {

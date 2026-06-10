@@ -1,0 +1,6 @@
+{
+  "parent": "paeronautics:block/bore_block",
+  "textures": {
+    "all": "paeronautics:block/bore_block/cyan"
+  }
+}

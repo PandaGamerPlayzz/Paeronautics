@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "paeronautics:pink_bore_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "dndesires:pink_bore_block"
+  }
+}
